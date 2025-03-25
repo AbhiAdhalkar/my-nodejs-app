@@ -4,9 +4,14 @@ on:
   push:
     branches:
       - main
+  create:
+    branches:
+      - release/*
+  workflow_dispatch:
 
 jobs:
-  check-access:
+  deploy-dev:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
 
     steps:
@@ -20,5 +25,5 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
 
-    - name: Verify AWS Connection
-      run: aws sts get-caller-identity
+    - name: Deploy to Dev
+      run: aws elasticbeanstalk deploy --application-name "${{ secrets.EB_APP_NAME }}" --environment-name "${{secrets.EB_DEV}}"
