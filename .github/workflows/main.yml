@@ -28,8 +28,7 @@ jobs:
     - name: install EBS CLI
       run: |
         pip install awsebcli
-        eb init -p node.js app1 --region us-east-1
-        eb deploy App1-dev
+        eb init -p node.js ${{EB_APP_NAME}} --region ${{AWS_REGION}}
+        eb deploy ${{EB_DEV}}
       
-    # - name: Deploy to Dev
-    #   run: aws elasticbeanstalk deploy --application-name "app1" --environment-name "App1-dev"
+   
