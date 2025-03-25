@@ -3,9 +3,10 @@ on:
   push:
     branches:
       - main
-  create:
-    branches:
       - release/*
+  # create:
+  #   branches:
+  #     - release/*
   workflow_dispatch: null
 jobs:
   deploy-dev:
