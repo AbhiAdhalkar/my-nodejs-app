@@ -1,16 +1,24 @@
-name: Deploy to Elastic Bean Stalk
+name: Deploy to Elastic Beanstalk
 
 on:
   push:
     branches:
       - main
+
 jobs:
   check-access:
     runs-on: ubuntu-latest
 
     steps:
-    - name: configure AWS credentials
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v2
       with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID}}
-        aws-secret-access-key: ${{}}
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+
+    - name: Verify AWS Connection
+      run: aws sts get-caller-identity
