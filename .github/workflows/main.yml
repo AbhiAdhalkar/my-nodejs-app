@@ -29,4 +29,4 @@ jobs:
       run: pip install awsebcli
       
     - name: Deploy to Dev
-      run: aws elasticbeanstalk deploy --application-name "${{ secrets.EB_APP_NAME }}" --environment-name "${{secrets.EB_DEV}}"
+      run: aws elasticbeanstalk deploy --application-name "app1" --environment-name "App1-dev"
