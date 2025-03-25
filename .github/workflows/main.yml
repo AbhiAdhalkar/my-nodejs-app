@@ -3,11 +3,17 @@ on:
   push:
     branches:
       - main
-      # - release/*
   create:
     branches:
       - release/*
-  workflow_dispatch: null
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      releaseType:
+        description: "Want to Deploy to Production?"
+        required: true
+        default: 'deploy-stg'
   
 jobs:
   deploy-dev:
