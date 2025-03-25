@@ -25,5 +25,8 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
 
+    - name: install EBS CLI
+      run: pip install awsebcli
+      
     - name: Deploy to Dev
       run: aws elasticbeanstalk deploy --application-name "${{ secrets.EB_APP_NAME }}" --environment-name "${{secrets.EB_DEV}}"
