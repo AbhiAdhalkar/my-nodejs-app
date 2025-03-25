@@ -3,10 +3,10 @@ on:
   push:
     branches:
       - main
+      # - release/*
+  create:
+    branches:
       - release/*
-  # create:
-  #   branches:
-  #     - release/*
   workflow_dispatch: null
 jobs:
   deploy-dev:
@@ -29,7 +29,7 @@ jobs:
 
           eb deploy ${{secrets.EB_DEV}}
   deploy-stg:
-    # if: startsWith(github.ref, 'refs/heads/release')
+    if: ${{github.event.ref_type == 'branch' && startsWith(github.ref, 'refs/heads/release/') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
