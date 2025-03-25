@@ -6,15 +6,8 @@ on:
   create:
     branches:
       - release/*
-  release:
-    types: [published]
   workflow_dispatch:
-    inputs:
-      releaseType:
-        description: "Want to Deploy to Production?"
-        required: true
-        default: 'deploy-stg'
-  
+    
 jobs:
   deploy-dev:
     if: github.ref == 'refs/heads/main'
@@ -54,11 +47,18 @@ jobs:
           
   approve-prod:
     needs: deploy-stg
+    if: success()
     runs-on: ubuntu-latest
-    environment: production
+    # environment: production
     steps:
       - name: "Ready to Deploy into Prod?"
-        run: echo "Approve this to deploy on EBS Production Environment"
+        uses: trstringer/manual-approval@v1
+        with:
+          approvers: AbhiAdhalkar
+          minimum-approvals: 1
+          issue-title: "Manual Approval Required for Terraform Apply"
+          issue-body: "Please approve or deny the deployment."
+        # run: echo "Approve this to deploy on EBS Production Environment"
         
   deploy-prod:
     needs: approve-prod
