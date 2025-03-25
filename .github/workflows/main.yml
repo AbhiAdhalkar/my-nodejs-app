@@ -29,7 +29,7 @@ jobs:
 
           eb deploy ${{secrets.EB_DEV}}
   deploy-stg:
-    if: startsWith(github.ref, 'refs/heads/release')
+    # if: startsWith(github.ref, 'refs/heads/release')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
