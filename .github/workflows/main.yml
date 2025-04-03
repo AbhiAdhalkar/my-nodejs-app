@@ -57,14 +57,13 @@ jobs:
     steps:
       - name: "Ready to Deploy into Prod?"
         uses: trstringer/manual-approval@v1
-        # with:
-        #   approvers: AbhiAdhalkar
-        #   minimum-approvals: 1
-        #   issue-title: "Manual Approval for Deployment to Production"
-        #   issue-body: "Please approve or deny the deployment."
-          # secret: ${{secrets.GITHUB_TOKEN}}
+        with:
+          approvers: AbhiAdhalkar
+          minimum-approvals: 1
+          issue-title: "Manual Approval for Deployment to Production"
+          issue-body: "Please approve or deny the deployment."
+          secret: ${{secrets.GITHUB_TOKEN}}
           # timeout-minutes: 30
-        # run: echo "Approve this to deploy on EBS Production Environment"
         
   deploy-prod:
     needs: approve-prod
