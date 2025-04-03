@@ -60,7 +60,7 @@ jobs:
         with:
           approvers: AbhiAdhalkar
           minimum-approvals: 1
-          issue-title: "Manual Approval Required for Terraform Apply"
+          issue-title: "Manual Approval for Deployment to Production"
           issue-body: "Please approve or deny the deployment."
           secret: ${{secrets.GITHUB_TOKEN}}
           timeout-minutes: 30
