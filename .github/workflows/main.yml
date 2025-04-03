@@ -58,6 +58,7 @@ jobs:
           minimum-approvals: 1
           issue-title: "Manual Approval Required for Terraform Apply"
           issue-body: "Please approve or deny the deployment."
+          secret: ${{secrets.GITHUB_TOKEN}}
         # run: echo "Approve this to deploy on EBS Production Environment"
         
   deploy-prod:
